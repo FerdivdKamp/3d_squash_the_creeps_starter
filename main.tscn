@@ -1,3 +1,18 @@
 [gd_scene format=3 uid="uid://2wap0283yk0r"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_1sgun"]
+size = Vector3(60, 2, 60)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1sgun"]
+size = Vector3(60, 2, 60)
+
 [node name="Main" type="Node" unique_id=1103366674]
+
+[node name="Ground" type="StaticBody3D" parent="." unique_id=77577812]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground" unique_id=2043640173]
+shape = SubResource("BoxShape3D_1sgun")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground" unique_id=1121669353]
+mesh = SubResource("BoxMesh_1sgun")
