@@ -24,6 +24,10 @@ config/icon="res://icon.webp"
 
 import/blender/enabled=false
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/gut/plugin.cfg")
+
 [input]
 
 move_left={
