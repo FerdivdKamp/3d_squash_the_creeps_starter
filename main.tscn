@@ -30,6 +30,8 @@ mob_scene = ExtResource("2_1bvp3")
 
 [node name="Ground" type="StaticBody3D" parent="." unique_id=77577812]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+collision_layer = 4
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground" unique_id=2043640173]
 shape = SubResource("BoxShape3D_1sgun")

@@ -1,5 +1,8 @@
 extends CharacterBody3D
 
+signal squashed
+
+
 # Minimal speed
 @export var minimal_speed: int = 10
 
@@ -33,4 +36,8 @@ func _on_visible_on_screen_notifier_3d_screen_entered() -> void:
 
 
 func _on_visible_on_screen_notifier_3d_screen_exited() -> void:
+	queue_free()
+
+func squash():
+	squashed.emit()
 	queue_free()
