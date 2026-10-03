@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://2wap0283yk0r"]
 
+[ext_resource type="Script" uid="uid://cc8n3086pvl18" path="res://main.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://ceuu150fmggvr" path="res://player.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://defdm2qdva75q" path="res://mob.tscn" id="2_1bvp3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1sgun"]
 size = Vector3(60, 2, 60)
@@ -15,8 +17,16 @@ albedo_color = Color(0.2627451, 1, 0.6392157, 1)
 material = SubResource("StandardMaterial3D_u716c")
 
 [sub_resource type="Curve3D" id="Curve3D_ig7tw"]
+closed = true
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -13.038284, 0, -17.889742, 0, 0, 0, 0, 0, 0, 13.038292, 0, -17.950386, 0, 0, 0, 0, 0, 0, 12.977646, 0, 14.918225, 0, 0, 0, 0, 0, 0, -13.098927, 0, 14.9788685),
+"tilts": PackedFloat32Array(0, 0, 0, 0)
+}
+point_count = 4
 
 [node name="Main" type="Node" unique_id=1103366674]
+script = ExtResource("1_h2yge")
+mob_scene = ExtResource("2_1bvp3")
 
 [node name="Ground" type="StaticBody3D" parent="." unique_id=77577812]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
@@ -60,5 +70,14 @@ mesh = SubResource("CylinderMesh_1sgun")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, -18)
 mesh = SubResource("CylinderMesh_1sgun")
 
-[node name="Path3D" type="Path3D" parent="." unique_id=1051443667]
+[node name="SpawnPath" type="Path3D" parent="." unique_id=1051443667]
 curve = SubResource("Curve3D_ig7tw")
+
+[node name="SpawnLocation" type="PathFollow3D" parent="SpawnPath" unique_id=808500323]
+transform = Transform3D(0.0023257274, 0, -0.9999973, 0, 1, 0, 0.9999973, 0, 0.0023257274, -13.038284, 0, -17.889742)
+
+[node name="MobTimer" type="Timer" parent="." unique_id=594129663]
+wait_time = 0.5
+autostart = true
+
+[connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
