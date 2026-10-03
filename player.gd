@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+signal hit
+
 const MovementMath = preload("res://movement_math.gd")
 
 
@@ -86,3 +88,11 @@ func _physics_process(delta):
 				target_velocity.y = bounce_impulse
 				# Prevent further duplicate calls.
 				break
+
+func die():
+	hit.emit()
+	queue_free()
+
+
+func _on_mob_detector_body_entered(body: Node3D) -> void:
+	die ()

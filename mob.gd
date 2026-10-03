@@ -39,5 +39,6 @@ func _on_visible_on_screen_notifier_3d_screen_exited() -> void:
 	queue_free()
 
 func squash():
+	print_debug("Mob squashed")
 	squashed.emit()
 	queue_free()

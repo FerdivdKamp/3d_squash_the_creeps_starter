@@ -24,3 +24,8 @@ func _on_mob_timer_timeout() -> void:
 	var player_position = $Player.global_position
 	mob.initialize(mob_spawn_location.global_position, player_position)
 	add_child(mob)
+
+
+func _on_player_hit() -> void:
+	print_debug("Player hit")
+	$MobTimer.stop()
