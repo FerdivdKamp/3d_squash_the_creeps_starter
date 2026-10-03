@@ -14,10 +14,20 @@ const MovementMath = preload("res://movement_math.gd")
 
 @export var bounce_impulse: int = 16
 
+# A quick burst in the direction the player is facing.
+@export var dash_speed_multiplier: float = 2.5
+@export var dash_duration: float = 0.18
+@export var dash_cooldown: float = 0.6
 
 var target_velocity = Vector3.ZERO
+var dash_direction := Vector3.FORWARD
+var dash_time_left := 0.0
+var dash_cooldown_left := 0.0
 
 func _physics_process(delta):
+	dash_time_left = maxf(0.0, dash_time_left - delta)
+	dash_cooldown_left = maxf(0.0, dash_cooldown_left - delta)
+
 	# Local variable to hold input direction
 	var direction := MovementMath.direction(
 		Input.is_action_pressed("move_left"),
@@ -27,13 +37,20 @@ func _physics_process(delta):
 	)
 
 
-	if direction != Vector3.ZERO:
+	if direction != Vector3.ZERO and dash_time_left <= 0.0:
 		# Setting the basis property for rotation
 		$Pivot.basis = Basis.looking_at(direction)
 
+	if Input.is_action_just_pressed("dash") and dash_cooldown_left <= 0.0:
+		dash_direction = -$Pivot.basis.z
+		dash_time_left = dash_duration
+		dash_cooldown_left = dash_cooldown
+
 	# Ground Velocity
-	target_velocity.x = direction.x * speed
-	target_velocity.z = direction.z * speed
+	var horizontal_direction := dash_direction if dash_time_left > 0.0 else direction
+	var horizontal_speed := speed * dash_speed_multiplier if dash_time_left > 0.0 else speed
+	target_velocity.x = horizontal_direction.x * horizontal_speed
+	target_velocity.z = horizontal_direction.z * horizontal_speed
 	
 	# Vertical Velocity
 	if not is_on_floor(): # If in the air fall towards the floor (gravity)
