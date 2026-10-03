@@ -1,4 +1,6 @@
 .import
 logs/
-.godot/*
+.godot/
 *.tmp
+*.translation
+*.blend[0-9]*

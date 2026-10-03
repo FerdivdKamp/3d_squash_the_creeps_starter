@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+const MovementMath = preload("res://movement_math.gd")
+
 
 ## Moving body properties
 # Pace in meters per second
@@ -12,21 +14,15 @@ var target_velocity = Vector3.ZERO
 
 func _physics_process(delta):
 	# Local variable to hold input direction
-	var direction = Vector3.ZERO
-	
-	# Check for each move input and update direction (X and Z axes)
-	if Input.is_action_pressed("move_right"):
-		direction.x += 1
-	if Input.is_action_pressed("move_left"):
-		direction.x -= 1
-	if Input.is_action_pressed("move_back"):
-		direction.z += 1
-	if Input.is_action_pressed("move_forward"):
-		direction.z -= 1
+	var direction := MovementMath.direction(
+		Input.is_action_pressed("move_left"),
+		Input.is_action_pressed("move_right"),
+		Input.is_action_pressed("move_forward"),
+		Input.is_action_pressed("move_back")
+	)
 
 
 	if direction != Vector3.ZERO:
-		direction = direction.normalized()
 		# Setting the basis property for rotation
 		$Pivot.basis = Basis.looking_at(direction)
 

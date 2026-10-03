@@ -20,6 +20,19 @@ run/main_scene="uid://2wap0283yk0r"
 config/features=PackedStringArray("4.7")
 config/icon="res://icon.webp"
 
+[display]
+
+window/size/viewport_width=720
+window/size/viewport_height=540
+
+[editor]
+
+run/main_run_args="--resolution 1600x900"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/gut/plugin.cfg")
+
 [filesystem]
 
 import/blender/enabled=false
