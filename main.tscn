@@ -8,6 +8,8 @@ size = Vector3(60, 2, 60)
 [sub_resource type="BoxMesh" id="BoxMesh_1sgun"]
 size = Vector3(60, 2, 60)
 
+[sub_resource type="CylinderMesh" id="CylinderMesh_1sgun"]
+
 [node name="Main" type="Node" unique_id=1103366674]
 
 [node name="Ground" type="StaticBody3D" parent="." unique_id=77577812]
@@ -33,3 +35,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 19)
 projection = 1
 size = 19.0
 far = 100.0
+
+[node name="Cylinders" type="Node3D" parent="." unique_id=1260441761]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Cylinders" unique_id=625608568]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -18)
+mesh = SubResource("CylinderMesh_1sgun")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Cylinders" unique_id=2013925942]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, 15)
+mesh = SubResource("CylinderMesh_1sgun")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Cylinders" unique_id=704242338]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 15)
+mesh = SubResource("CylinderMesh_1sgun")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Cylinders" unique_id=1074373493]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, -18)
+mesh = SubResource("CylinderMesh_1sgun")
