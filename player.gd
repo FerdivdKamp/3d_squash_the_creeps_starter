@@ -10,6 +10,8 @@ const MovementMath = preload("res://movement_math.gd")
 # Downward acceleration whien in the air in meters per second squared
 @export var fall_acceleration: float = 75.0
 
+@export var jump_impulse: int = 20
+
 var target_velocity = Vector3.ZERO
 
 func _physics_process(delta):
@@ -37,3 +39,6 @@ func _physics_process(delta):
 	# Moving the Character
 	velocity = target_velocity
 	move_and_slide()
+
+	if is_on_floor() and Input.is_action_just_pressed("jump"):
+		target_velocity.y = jump_impulse
